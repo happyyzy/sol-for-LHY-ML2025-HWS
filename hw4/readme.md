@@ -11,7 +11,7 @@
 | Public Strong Baseline  | ≤ 73.00 | ≥ 0.85 | 30 mins | +1pt |
 | Private Strong Baseline | ≤ 73.00 | ≥ 0.85 | — | +1pt |
 
-本次作业只提供[本地代码(ML2025_Spring_HW4.ipynb)
+本次作业只提供[本地代码](ML2025_Spring_HW4.ipynb)
 
 # Evalution
 fid和pdr，fid有现成的包，直接自己下载算分数就好了，pdr是宝可梦分类正确率，作业指导没指明是啥模型，我在网上也没找到合适的，感兴趣的可以自己下载个VL模型来分类。
