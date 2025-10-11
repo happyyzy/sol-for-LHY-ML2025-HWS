@@ -20,7 +20,7 @@ tokenizer = get_chat_template(
     chat_template = "llama",  ### Use llama-3.1 template for better performance here
 )
 ```
-这里官方代码注释要用llama-3.1 template，但会引起后面报错，我用"llama"也没觉得影响表现。诸如此类的恶心地方挺多的，所以还是有钱好（
+这里官方代码注释要用llama-3.1 template，但会引起后面报错，我用"llama"也没觉得影响表现。诸如此类的恶心地方挺多的，所以还是有米好啊hh。
 本次的数据集Evol_Instruct都是情景问答类没有精确评分指标，所以要用其他模型评分，官方使用gpt4o-mini，并公开了[评分代码](https://drive.google.com/file/d/12WFH1mCBG2zTM29olVy_itq7-pPWmRtX/view?usp=sharing),我没有openai的api，看到ollama api上有gpt-oss-120b-cloud，于是用它来评分（希望gpt好兄弟们口味一致吧），
 评分程序在[eval.ipynb](eval.ipynb)。
 
