@@ -23,7 +23,9 @@
 # Code
 本次提供的代码一次性跑通是得不到这样的结果的，每个对象都要逐个调参，kaggle P100上一张图片一分钟左右，15×6张图片，验证过程很快。
 
-主要参数有三个，[作业指导](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw10.pdf)里面提到两个：num_inference_steps和guidance_scale，但是这两个经笔者尝试没啥用，去噪步数25左右就好，调得再大也没啥作用，guidance_scale7左右就好，也不太影响生成结果，过大/过小反而使生成结果很糟糕；最关键的参数是ip-adpter的控制强度ip_adapter_scale,该参数因任务而易，比如对object-4我最开始设为ip_adapter_scale=0.8导致模型对prompt关注太少根本不给小狗戴上墨镜，clip score很低，最后设为0.6才达到满意效果；而对object-5，ip_adapter_scale=0.6又太关注prompt，生成的玩具机器人和参考图像差别太大导致DINO不及格，调到0.8才通过baseline。
+主要参数有三个，[作业指导](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw10.pdf)里面提到两个：num_inference_steps和guidance_scale，但是这两个经笔者尝试没啥用，去噪步数25左右就好，调得再大也没啥作用，guidance_scale7左右就好，也不太影响生成结果，过大/过小反而使生成结果很糟糕；
+
+最关键的参数是ip-adpter的控制强度ip_adapter_scale,该参数因任务而易，比如对object-4我最开始设为ip_adapter_scale=0.8导致模型对prompt关注太少根本不给小狗戴上墨镜，clip score很低，最后设为0.6才达到满意效果；而对object-5，ip_adapter_scale=0.6又太关注prompt，生成的玩具机器人和参考图像差别太大导致DINO不及格，调到0.8才通过baseline。
 
 
 # Evaluation
