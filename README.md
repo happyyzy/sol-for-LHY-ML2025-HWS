@@ -1,7 +1,7 @@
-# sol-for-LHY-ML2025-HWS
+# Sol-for-LHY-ML2025-HWS
 李宏毅老师2025ai课的作业解答，包括相关的自学笔记
 
-# contents
+# Contents
 课程[官网](https://speech.ee.ntu.edu.tw/~hylee/ml/2025-spring.php)共有十次作业如下
 | HW | Date  | Topic                               | Deadline           | Members                        |
 |----|--------|-------------------------------------|--------------------|--------------------------------|
@@ -18,6 +18,6 @@
 
 其中hw3和hw7是代码填空+问题回答，之后有时间会把这部分补上，hw8和hw9不感兴趣没做，此外还剩六个作业，这六个作业除了hw2都达到要求的boss baseline，会在本项目中附上完整代码和探索过程。
 
-# environment
+# Environment
 本地环境为单卡5060ti+ubuntu24.04，偶尔也在[kaggle notebook](https://www.kaggle.com/)工作,本地环境已经打包为[requirments.txt](https://github.com/Yuahgfngu/sol-for-LHY-ML2025-HWS/blob/main/requirements.txt)。
 
