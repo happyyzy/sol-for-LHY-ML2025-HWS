@@ -5,7 +5,8 @@
 | Simple baseline  | 4                     | 6                      |
 | Medium baseline  | 10                    | 15                     |
 | Strong baseline  | 18                    | 22                     |
-本次作业只提供本地代码。
+
+本次作业只提供[本地代码](qwen3_rag.py)。
 
 # Models & Evaluation
 [官方代码](https://www.kaggle.com/code/u0ulin/ml2025-homework-1)用的模型是Meta-Llama-3.1-8B-Instruct-Q8_0.gguf,但是这个模型能力挺拉的，[作业指导](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data//hw1.pdf)里面也说了可以随便选模型改pipline，并且
