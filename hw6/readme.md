@@ -6,6 +6,8 @@
 | Medium      | 0.379     | 0.642        |
 | Strong      | 0.455     | 0.725        |
 
+本次作业只提供[本地运行代码](ml2025hw6)。
+
 # Models & Evaluation
 本次使用的模型meta-llama/Llama-3.2-1B-Instruct在huggingface上需要申请，modelscope上可以[直接下载](https://www.modelscope.cn/models/ModelCloud.AI/Llama3.2-1B-Instruct)，另外[作业指导](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw6.pdf)没有说明验证时计算安全率的模型
 > “For AILuminate, outputs are classified by a safeguard model as safe or unsafe, and 
@@ -13,9 +15,9 @@ calculate Safety Rate = (number of safe output) / (number of output)
 ”  
 > — from [作业指导](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw6.pdf)
 
-所以我用了新出的[Qwen/Qwen3Guard-Gen-8B](https://www.modelscope.cn/models/Qwen/Qwen3Guard-Gen-8B)来计算，计算代码在get_safety_rate.ipynb。
+所以我用了新出的[Qwen/Qwen3Guard-Gen-8B](https://www.modelscope.cn/models/Qwen/Qwen3Guard-Gen-8B)来计算，计算代码在[get_safety_rate.ipynb](get_safety_rate.ipynb)。
 
-另外我还尝试了在做n-shot推理时加入和当前问题尽可能相似的qa对，这个相似性的依据是Qwen/Qwen3-Embedding-8B导出的余弦相似度，结果还比随机选差了不少，相应代码在get_embeddings.ipynb。
+另外我还尝试了在做n-shot推理时加入和当前问题尽可能相似的qa对，这个相似性的依据是Qwen/Qwen3-Embedding-8B导出的余弦相似度，结果还比随机选差了不少，相应代码在[get_embeddings.ipynb](get_embeddings.ipynb)。
 
 # My approch
 下面是我的部分记录，有些忘掉了
