@@ -19,5 +19,5 @@
 其中hw3和hw7是代码填空+问题回答，之后有时间会把这部分补上，hw8和hw9不感兴趣没做，此外还剩六个作业，这六个作业除了hw2都达到要求的boss baseline，会在本项目中附上完整代码和探索过程。
 
 # environment
-本项目大部分时候都是单卡5060ti，偶尔也在[kaggle notebook](https://www.kaggle.com/)工作,本地环境已经打包为[requirments.txt](https://github.com/Yuahgfngu/sol-for-LHY-ML2025-HWS/blob/main/requirements.txt)。
+本地环境为单卡5060ti+ubuntu24.04，偶尔也在[kaggle notebook](https://www.kaggle.com/)工作,本地环境已经打包为[requirments.txt](https://github.com/Yuahgfngu/sol-for-LHY-ML2025-HWS/blob/main/requirements.txt)。
 
