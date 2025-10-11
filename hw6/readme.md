@@ -17,7 +17,7 @@ calculate Safety Rate = (number of safe output) / (number of output)
 
 另外我还尝试了在做n-shot推理时加入和当前问题尽可能相似的qa对，这个相似性的依据是Qwen/Qwen3-Embedding-8B导出的余弦相似度，结果还比随机选差了不少，相应代码在get_embeddings.ipynb。
 
-#My approch
+# My approch
 下面是我的部分记录，有些忘掉了
 
 | Config (Method)                                           | GSM8K (+) & Inference | Training Time | Safety & Inference | Epoch |
