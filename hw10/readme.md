@@ -1,11 +1,13 @@
 # Goal
 本次作业的目标是: Customization of text-to-image (T2I) diffusion model，或者简单来讲就是换头，给了六种对象，希望在用prompt生成图像时对应的主体来自相应的类别。
 
-# [Hints](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw10.pdf)
-官方作业指导给了两种途径，一种是[blip diffusion](https://huggingface.co/salesforce/blipdiffusion)，简而言之就是通常的diffusion只能用clip接受文本提示，而blip diffusion把clip换成一个叫blip的组件，能同时接受文本和参考图像；然而blip diffuasion之能接受一张参考图像并且生成可控性较差，所以还有一条路叫DreamBooth，即在 Stable Diffusion 的文本编码空间中加入一个新 token（比如 “sks turtle”），并通过微调让模型学会把这个 token 对应到你提供的乌龟玩具样子，这种途径在参考图像是多张的时候往往效果更好。
+# Hints
+[官方作业指导](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw10.pdf)给了两种途径，一种是[blip diffusion](https://huggingface.co/salesforce/blipdiffusion)，简而言之就是通常的diffusion只能用clip接受文本提示，而blip diffusion把clip换成一个叫blip的组件，能同时接受文本和参考图像；然而blip diffuasion之能接受一张参考图像并且生成可控性较差，所以还有一条路叫DreamBooth，即在 Stable Diffusion 的文本编码空间中加入一个新 token（比如 “sks turtle”），并通过微调让模型学会把这个 token 对应到你提供的乌龟玩具样子，这种途径在参考图像是多张的时候往往效果更好。
 
 # My approch
 我尝试了blip diffusion后发现效果较差，无论怎么按照[Hints](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw10.pdf)调参数也离boss baseline差得远，后来发现blipdiffusion是个很冷门的东西，自从当年的几篇论文后再也没动静，并且新版的diffusers0.33版本后已停止对该模型的更新支持，目前在这类任务上比较主流的是controlnet的相关变体，我尝试了其中的[ip-adpter](https://huggingface.co/h94/IP-Adapter),在多次调参后成功通过[作业指导](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw10.pdf)中的boss baseline。
+
+另外ip-adapter其实就是搞个厉害点的clip把参考图像喂给它，更加说明blip完全是多此一举效果还差。。
 
 ## 📊 Performance Comparison
 
@@ -19,11 +21,15 @@
 | Object 6  | 57               | 17            | 62               | 29            |
 
 ## Code
-本次提供的代码一次性跑通是得不到这样的结果的，每个对象都要逐个调参，主要参数有三个，[作业指导](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw10.pdf)里面提到两个：num_inference_steps和guidance_scale，但是这两个经笔者尝试没啥用，去噪步数25左右就好，调得再大也没啥作用，guidance_scale7左右就好，也不太影响生成结果，过大/过小反而使生成结果很糟糕；最关键的参数是ip-adpter的控制强度ip_adapter_scale,该参数因任务而易，比如对object-4我最开始设为ip_adapter_scale=0.8导致模型对prompt关注太少根本不给小狗戴上墨镜，clip score很低，最后设为0.6才达到满意效果；而对object-5，ip_adapter_scale=0.6又太关注prompt生成的玩具机器人，和参考图像差别太大导致DINO不及格，调到0.8才通过baseline。
+本次提供的代码一次性跑通是得不到这样的结果的，每个对象都要逐个调参，主要参数有三个，[作业指导](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw10.pdf)里面提到两个：num_inference_steps和guidance_scale，但是这两个经笔者尝试没啥用，去噪步数25左右就好，调得再大也没啥作用，guidance_scale7左右就好，也不太影响生成结果，过大/过小反而使生成结果很糟糕；最关键的参数是ip-adpter的控制强度ip_adapter_scale,该参数因任务而易，比如对object-4我最开始设为ip_adapter_scale=0.8导致模型对prompt关注太少根本不给小狗戴上墨镜，clip score很低，最后设为0.6才达到满意效果；而对object-5，ip_adapter_scale=0.6又太关注prompt，生成的玩具机器人和参考图像差别太大导致DINO不及格，调到0.8才通过baseline。
 
 
 # Evaluation
-[作业指导](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw10.pdf)中讲了验证指标是[facebook/dinov2-large](https://huggingface.co/facebook/dinov2-large)计算的相似度，用来验证生成图像和参考图像的相似程度，同时为了兼顾生成图像对prompt的贴合程度，还要用计算[openai/clip-vit-large-patch14-336](https://huggingface.co/openai/clip-vit-large-patch14)score，这部分验证代码也包含在代码文件里了。
+[作业指导](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw10.pdf)中讲了验证指标是[facebook/dinov2-large](https://huggingface.co/facebook/dinov2-large)计算的相似度，用来验证生成图像和参考图像的相似程度，同时为了兼顾生成图像对prompt的贴合程度，还要用计算[openai/clip-vit-large-patch14-336](https://huggingface.co/openai/clip-vit-large-patch14)score，注意加载这个clip的时候需要较低版本的transforemsers:
+```python
+pip install -q transformers==4.42.4
+```
+这部分验证代码也包含在代码文件里了。
 
 # Reference
 本次作业还参考了李宏毅老师2024年ml课的[hw10](https://speech.ee.ntu.edu.tw/~hylee/genai/2024-spring.php),该作业和本次作业任务类似，是给了演员Brad的100个图片-文本对，直接微调diffusion来对给定的25个测试propmt生成人像。下面我来讲讲这份作业的坑。
@@ -50,7 +56,11 @@ pipeline.load_ip_adapter("h94/IP-Adapter",
                          weight_name=["ip-adapter-plus-face_sdxl_vit-h.safetensors"] ,
                          image_encoder_folder="models/image_encoder")
 ```
-ghostnet distance直接暴降到1.15，clip score和faceless faces都达到bossbaseline，但是老实说这版的图片看起来换头感特严重,如下
-![boss baseline](/mnt/e/pyproject/diff_ft/generated_images_plus/image_13.jpg)
-还不如没达到boss生成的自然，可能这就是ip-adapter-plus-face_sdxl_vit-h和gohstnet共同的人机审美吧。。
+ghostnet distance直接暴降到1.15，clip score和faceless faces都达到bossbaseline，但是老实说这版图片看起来换头感特严重,如下
+![boss baseline](image_13.jpg)
+还不如没达到boss生成的自然，可能这就是ip-adapter-plus-face_sdxl_vit-h和ghostnet共同的人机审美吧。。
+
+另外这里ip_adapter_scale=0.8也能让模型很听prompt的话，不像之前生成猫狗得跳到0.6左右，可能模型训练数据里面人像比较多吧。
+
+至此似乎也没啥必要用DreamBooth了，以后有空可能会试试吧。或者大家催催我（
 
