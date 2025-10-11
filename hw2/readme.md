@@ -14,4 +14,4 @@
 
 我还发现这个给agent的任务其实是李宏毅老师[ml2023](https://speech.ee.ntu.edu.tw/~hylee/ml/2023-spring.php)的hw1:regression，数据集格式一模一样，只是取得大数据集的不同片段，当时这份作业的boss baseline是0.81456，
 而且当时还不流行agent，这个作业是布置给学生做的，当年的[leaderboard](https://www.kaggle.com/competitions/ml2023spring-hw1/leaderboard)和现在这个
-agent的[leaderboard](https://www.kaggle.com/competitions/ml-2025-spring-hw-2/leaderboard)分布特别像，都是两三个0.5开头的，之后断层到0.8+,还挺有趣的。
+agent的[leaderboard](https://www.kaggle.com/competitions/ml-2025-spring-hw-2/leaderboard)分布特别像，都是两三个0.5开头的，之后断层到0.8+,还挺有趣的。（老实说我觉得这几个0.5的人应该知道某个特定的个技巧，然后再提示词里面暗示或明示了。）
