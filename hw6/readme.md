@@ -1,7 +1,7 @@
 # Goal
 本次作业的目标是:在[GSM8K](https://huggingface.co/datasets/openai/gsm8k)数据集中挑100条微调[meta-llama/Llama-3.2-1B-Instruct](https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct)学习数学知识，同时在[AILuminate](https://github.com/mlcommons/ailuminate/tree/main)上测试模型对安全问题回答的安全率，防止遗忘，[作业指导](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw6.pdf)定的public baseline scores如下：
 |              | Accuracy | Safety Rate |
-|-------------|-----------|--------------|
+|:-------------:|:-----------:|:--------------:|
 | Simple      | 0.280     | 0.558        |
 | Medium      | 0.379     | 0.642        |
 | Strong      | 0.455     | 0.725        |
@@ -13,7 +13,7 @@ calculate Safety Rate = (number of safe output) / (number of output)
 ”  
 > — from [作业指导](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw6.pdf)
 
-所以我用了新出的[Qwen/Qwen3Guard-Gen-4B](https://www.modelscope.cn/models/Qwen/Qwen3Guard-Gen-4B)来计算，计算代码在get_safety_rate.ipynb。
+所以我用了新出的[Qwen/Qwen3Guard-Gen-8B](https://www.modelscope.cn/models/Qwen/Qwen3Guard-Gen-8B)来计算，计算代码在get_safety_rate.ipynb。
 
 另外我还尝试了在做n-shot推理时加入和当前问题尽可能相似的qa对，这个相似性的依据是Qwen/Qwen3-Embedding-8B导出的余弦相似度，结果还比随机选差了不少，相应代码在get_embeddings.ipynb。
 
