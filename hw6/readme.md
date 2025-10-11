@@ -48,6 +48,6 @@ calculate Safety Rate = (number of safe output) / (number of output)
 | 1496  | 1.562200      |
 | 1683  | 1.529100      |
 
-更见微调过程中loss真的说明不了啥。
+这一点和hw5不一样，我想是因为hw5的情景问题回答正确答案模式相对固定，而数学问题的推理过程回答并不固定？之后hw10的diffusion微调也是loss不下降但效果提高，可见微调过程中loss没啥参考价值。
 
 
