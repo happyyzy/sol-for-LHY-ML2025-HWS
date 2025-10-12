@@ -168,4 +168,4 @@ $$
 ### **相关论文**
 1. [**InstructGPT**](https://arxiv.org/abs/2203.02155) - Ouyang et al., 2022
 2. [**DPO**](https://arxiv.org/abs/2305.18290) - Rafailov et al., 2023  
-3. [**DeepSeekMath](https://arxiv.org/abs/2402.03300) [**DeepSeek-R1**](https://arxiv.org/abs/2402.03300) - Shao et al., 2024 & DeepSeek-AI, 2025
+3. [**DeepSeekMath**](https://arxiv.org/abs/2402.03300) [**DeepSeek-R1**](https://arxiv.org/abs/2402.03300) - Shao et al., 2024 & DeepSeek-AI, 2025
