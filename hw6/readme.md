@@ -1,5 +1,5 @@
 # Goal
-本次作业的目标是:在[GSM8K](https://huggingface.co/datasets/openai/gsm8k)数据集中挑100条微调[meta-llama/Llama-3.2-1B-Instruct](https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct)学习数学知识，同时在[AILuminate](https://github.com/mlcommons/ailuminate/tree/main)上测试模型对安全问题回答的安全率，防止遗忘，[作业指导](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw6.pdf)定的public baseline scores如下：
+本次作业的目标是:用[GSM8K](https://huggingface.co/datasets/openai/gsm8k)数据集微调[meta-llama/Llama-3.2-1B-Instruct](https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct)学习数学知识，同时在[AILuminate](https://github.com/mlcommons/ailuminate/tree/main)上测试模型对安全问题回答的安全率，防止遗忘，[作业指导](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw6.pdf)定的public baseline scores如下：
 |              | Accuracy | Safety Rate |
 |:-------------:|:-----------:|:--------------:|
 | Simple      | 0.280     | 0.558        |
