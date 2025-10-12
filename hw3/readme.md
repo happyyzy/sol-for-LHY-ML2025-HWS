@@ -233,6 +233,26 @@ b. "我接受我的决定塑造了我的未来，虽然错误是不可避免的�
    - [ ] 假  
 
 # Remark
-本次作业和2024ml hw7相近，我也跑了一遍放在这里，指导放在这里。
+
+本次作业与 2024 ML HW7 相近。作业资源如下：  
+- [完整问题列表](https://hackmd.io/@reu7cWRzREKcA7gfMs6hxw/SyOYywp6a)  
+- [官方代码](https://colab.research.google.com/drive/1Xnz0GHC0yWO2Do0aAYBCq9zL45lbiRjM?usp=sharing)（保存了完整输出结果，无需自己跑，做起来方便很多）
+
+---
+
+## 作业分三部分
+
+1. **Machine Translation Task**  
+   - 使用中译英模型 `Helsinki-NLP/opus-mt-zh-en`  
+   - 对一句话使用 **梯度方法** 和 **注意力权重** 生成输入-输出的热力图
+
+2. **Sentence Completion Task**  
+   - 使用 `GPT2-XL` base 模型  
+   - 对生成下一词的过程中，对之前词的注意力分数使用 **梯度方法** 和 **注意力权重** 生成热力图
+
+3. **LLM Explanation**  
+   - 与 ChatGPT 对话，让其生成重要性分数或展示思考链  
+   - 此部分没有代码，直接使用 LLM 的 Web 界面即可
+
 
 
