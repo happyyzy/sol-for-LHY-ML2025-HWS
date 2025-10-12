@@ -16,7 +16,7 @@
 | 9  | 5/16   | Model Merging                      | 06/06/2025 23:59   | 黃筱穎、陳又華、謝翔           |
 | 10 | 5/23   | Diffusion                          | 06/13/2025 23:59   | 林熙哲、袁紹翔、劉建蘴         |
 
-其中hw3和hw7是代码填空+问题回答，之后有时间会把这部分补上，hw8和hw9不感兴趣没做，此外还剩六个作业，这六个作业除了hw2都达到要求的boss baseline，会在本项目中附上完整代码和探索过程。
+hw8和hw9不感兴趣没做，其余八个作业除了hw2都达到要求的boss baseline，会在本项目中附上完整代码和探索过程。
 
 # Environment
 本地环境为单卡5060ti+ubuntu24.04，偶尔也在[kaggle notebook](https://www.kaggle.com/)工作,本地环境已经打包为[requirments.txt](https://github.com/Yuahgfngu/sol-for-LHY-ML2025-HWS/blob/main/requirements.txt)。
