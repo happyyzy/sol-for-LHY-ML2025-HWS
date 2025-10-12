@@ -169,3 +169,7 @@ $$
 1. [**InstructGPT**](https://arxiv.org/abs/2203.02155) - Ouyang et al., 2022
 2. [**DPO**](https://arxiv.org/abs/2305.18290) - Rafailov et al., 2023  
 3. [**DeepSeekMath**](https://arxiv.org/abs/2402.03300) [**DeepSeek-R1**](https://arxiv.org/abs/2402.03300) - Shao et al., 2024 & DeepSeek-AI, 2025
+
+# Remark
+本次作业内容和2024ml hw6差不多，[那份作业](https://colab.research.google.com/drive/1d3zmkqo-ZmxrIOYWSe3vDD0za8tUPguu?usp=sharing)用的是个台-德语言模型,感兴趣可以去看看。
+
