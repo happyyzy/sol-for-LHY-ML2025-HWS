@@ -1,5 +1,5 @@
 # Goal
-用unsloth对unsloth/llama-3-8b-Instruct做DPO，50条训练集，10条测试集，作业任务是回答问题，整体如下。
+用unsloth对unsloth/llama-3-8b-Instruct做DPO，50条训练集，10条测试集，本地代码在这里，作业任务是回答问题，整理如下。
 
 
 
