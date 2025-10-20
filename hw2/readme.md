@@ -9,9 +9,12 @@
 本次作业没达到boss baseline，所以懒得贴代码。。
 
 # My approch
-简而言之试了各种办法，甚至用qwen3-480b-coder当基座，最低也只到0.861左右，不知道[kaggle leaderboard](https://www.kaggle.com/competitions/ml-2025-spring-hw-2/leaderboard)上那些刷到0.5的神仙是怎么搞的。。
+简而言之试了各种办法只能达到medium baseline，我还尝试了一些现成的主流agent，比如qwen3-480b-coder当基座的Cline，以及chatgpt5的codex，最低也只到0.861左右，不知道[kaggle leaderboard](https://www.kaggle.com/competitions/ml-2025-spring-hw-2/leaderboard)上那些刷到0.5的神仙是怎么搞的。。
+
 另外我自己费好大力气做这个任务也就到0.80194：真-我不如人机。我自己的代码[在这](my_code-public-0-79.ipynb)。
 
-我还发现这个给agent的任务其实是李宏毅老师[ml2023](https://speech.ee.ntu.edu.tw/~hylee/ml/2023-spring.php)的hw1:regression，数据集格式一模一样，只是取得大数据集的不同片段，当时这份作业的boss baseline是0.81456，
-而且当时还不流行agent，这个作业是布置给学生做的，当年的[leaderboard](https://www.kaggle.com/competitions/ml2023spring-hw1/leaderboard)和现在这个
-agent的[leaderboard](https://www.kaggle.com/competitions/ml-2025-spring-hw-2/leaderboard)分布特别像，都是两三个0.5开头的，之后断层到0.8+,还挺有趣的。（老实说我觉得这几个0.5的人应该知道某个特定的个技巧，然后再提示词里面暗示或明示了。）
+qwen3-480b-coder和codex应该算目前code agent里面比较厉害的了，但是它们在此任务上总是囿于各种随机森林和模型集成，没啥新颖的想法，也总是倾向于搞复杂的特征工程，得及时调整提示词，然而最终离boss baseline还差如此多，所以我认为那些高分同学大概率是把自己的做法透露给模型让他跟着做了，但是那样做code agent还有啥意义呢。
+
+我还发现这个给agent的任务其实是李宏毅老师[ml2023](https://speech.ee.ntu.edu.tw/~hylee/ml/2023-spring.php)的hw1:regression，数据集格式一模一样，只是取的大数据集的不同片段，当时这份作业的boss baseline是0.81456，
+彼时还不流行agent，这个作业是布置给学生做的，当年的[leaderboard](https://www.kaggle.com/competitions/ml2023spring-hw1/leaderboard)和现在这个
+agent的[leaderboard](https://www.kaggle.com/competitions/ml-2025-spring-hw-2/leaderboard)分布特别像，都是两三个0.5开头的，之后断层到0.8+,还挺有趣的。（所以说我觉得这几个0.5的同学应该知道某个特定的技巧，然后在提示词里面暗示或明示了。）
