@@ -5,7 +5,7 @@
 [官方作业指导](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw10.pdf)给了两种途径，一种是[blip diffusion](https://huggingface.co/salesforce/blipdiffusion)，简而言之就是通常的diffusion只能用clip接受文本提示，而blip diffusion把clip换成一个叫blip的组件，能同时接受文本和参考图像；然而blip diffuasion之能接受一张参考图像并且生成可控性较差，所以还有一条路叫DreamBooth，即在 Stable Diffusion 的文本编码空间中加入一个新 token（比如 “sks turtle”），并通过微调让模型学会把这个 token 对应到你提供的乌龟玩具样子，这种途径在参考图像是多张的时候往往效果更好。
 
 # My approch
-我尝试了blip diffusion后发现效果较差，无论怎么按照[Hints](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw10.pdf)调参数也离boss baseline差得远，后来发现blipdiffusion是个很冷门的东西，自从当年的几篇论文后再也没动静，并且新版的diffusers0.33版本后已停止对该模型的更新支持，目前在这类任务上比较主流的是controlnet的相关变体，我尝试了其中的[ip-adpter](https://huggingface.co/h94/IP-Adapter),在多次调参后成功通过[作业指导](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw10.pdf)中的boss baseline。
+我尝试了blip diffusion后发现效果较差，无论怎么按照[Hints](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw10.pdf)调参数也离boss baseline差得远，后来发现blip diffusion是个很冷门的东西，自从当年的几篇论文后再也没动静，并且新版的diffusers0.33版本后已停止对该模型的更新支持，目前在这类任务上比较主流的是controlnet的相关变体，我尝试了其中的[ip-adpter](https://huggingface.co/h94/IP-Adapter),在多次调参后成功通过[作业指导](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw10.pdf)中的boss baseline。
 
 另外ip-adapter其实就是搞个厉害点的clip把参考图像喂给它，更加说明blip完全是多此一举效果还差。。
 
@@ -21,7 +21,7 @@
 | Object 6  | 57               | 17            | 62               | 29            |
 
 # Code
-本次提供的代码一次性跑通是得不到这样的结果的，每个对象都要逐个调参，kaggle P100上一张图片一分钟左右，15×6张图片，验证过程很快。
+本次提供的代码一次性跑通是得不到这样的结果的，每个对象都要逐个调参，kaggle P100上一张图片一分钟左右，15×6张图片，验证过程相对快很多。另外我用的sdxl支持jax/flax，可以用kaggle的tup v5e-8推理，生成一张图片时间能暴降到2s。
 
 主要参数有三个，[作业指导](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw10.pdf)里面提到两个：num_inference_steps和guidance_scale，但是这两个经笔者尝试没啥用，去噪步数25左右就好，调得再大也没啥作用，guidance_scale7左右就好，也不太影响生成结果，过大/过小反而使生成结果很糟糕；
 
@@ -60,11 +60,11 @@ pipeline.load_ip_adapter("h94/IP-Adapter",
                          weight_name=["ip-adapter-plus-face_sdxl_vit-h.safetensors"] ,
                          image_encoder_folder="models/image_encoder")
 ```
-ghostnet distance直接暴降到1.15，clip score和faceless faces都达到bossbaseline，但是老实说这版图片看起来换头感特严重,如下
+ghostnet distance直接暴降到1.15，clip score和faceless faces都达到boss baseline，但是老实说这版图片看起来换头感特严重,如下
 ![boss baseline](image_13.jpg)
-还不如没达到boss生成的自然，可能这就是ip-adapter-plus-face_sdxl_vit-h和ghostnet共同的人机审美吧。。
+还不如没达到boss baseline生成的自然，可能这就是ip-adapter-plus-face_sdxl_vit-h和ghostnet共同的人机审美吧。。
 
-另外这里ip_adapter_scale=0.8也能让模型很听prompt的话，不像之前生成猫狗得跳到0.6左右，可能模型训练数据里面人像比较多吧。
+另外这里ip_adapter_scale=0.8也能让模型很听prompt的话，不像之前生成猫狗得调到0.6左右，可能模型训练数据里面人像比较多吧。
 
 至此似乎也没啥必要用DreamBooth了，以后有空可能会试试吧。或者大家催催我（
 
