@@ -35,6 +35,8 @@ calculate Safety Rate = (number of safe output) / (number of output)
 
 可以发现提点的大部分trick都是decode阶段，像Greedy decode + 3-shots + max_new_tokens=1024，训练过程可提点的东西不多，像droupout+weight decay这种东西基本没啥用，数据本身的质量更重要。lora rank在这种小数据集上8-16就行了，大了过拟合还训练慢。
 
+另外既然助教提供的self instruct数据集如此强大，我就想试着复现一下，最终确定这***必然是更强的模型生成的***，目前众多项目都沿用这种说法来宣传/包装自己。
+
 最后还有两个点，一是boss baseline的训练根本不像[作业指导](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw6.pdf)里面所说的需要Strong: 12hr(fine-tuning) + 2hr(inference) = 14hr这么长时间，二是达到boss baseline的微调过程中loss根本没咋动：
 | Step  | Training Loss |
 |:----:|:------------:|
