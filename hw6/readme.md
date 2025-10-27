@@ -35,7 +35,13 @@ calculate Safety Rate = (number of safe output) / (number of output)
 
 可以发现提点的大部分trick都是decode阶段，像Greedy decode + 3-shots + max_new_tokens=1024，训练过程可提点的东西不多，像droupout+weight decay这种东西基本没啥用，数据本身的质量更重要。lora rank在这种小数据集上8-16就行了，大了过拟合还训练慢。
 
-另外既然助教提供的self instruct数据集如此强大，我就想试着复现一下，最终确定这***必然是更强的模型生成的***，目前众多项目都沿用这种说法来宣传/包装自己。
+## 关于self instruct
+另外既然助教提供的self instruct数据集如此强大，我就想试着复现一下，用正确率43.2的那个模型。
+- 先试了在sample code框架（即transforers的pipeline）下无n-shot(怕速度太慢)直接生成，一道题生成8个回答，挑选其中答案对的，结果生成速度巨慢，得20+h才行，无论怎么调回答个数和batch_size也没用，max_newtokens=512。
+- 然后试用vllm的llm.generate生成，发现一道题生成几个回答对生成速度影响不大，设为16，需8h左右，提速三倍；
+- 又尝试加上3-shot来降低0-shot的num_per_prompt到8，此时不能用llm.generate生成，需要llm.chat来给对话这个list of dictionary套上模板才能正常推理，max_newtokens=1024,发现生成速度没啥变化，仍需8h左右，主要瓶颈在io读取。
+- 于是分批把3-shot prompt喂给llm.chat，速度一下飙升，经试验每批100个速度最快，只需两个多小时。
+- 总结一下，前后推理速度提高10倍，vllm的默认配置也有相当大优化空间。
 
 最后还有两个点，一是boss baseline的训练根本不像[作业指导](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw6.pdf)里面所说的需要Strong: 12hr(fine-tuning) + 2hr(inference) = 14hr这么长时间，二是达到boss baseline的微调过程中loss根本没咋动：
 | Step  | Training Loss |
