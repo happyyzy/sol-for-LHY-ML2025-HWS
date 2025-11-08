@@ -69,6 +69,4 @@ hw9
 
 ---
 
-hw9
-
-（学生的 merging 目标就是让 merged adapter “同时”保住这两个能力）
+我对slerp感兴趣，之后可能会做这个作业。
