@@ -2,10 +2,10 @@
 本次作业的目标是: Customization of text-to-image (T2I) diffusion model，或者简单来讲就是换头，给了六种对象，希望在用prompt生成图像时对应的主体来自相应的类别。本次提供kaggle notebook[代码](https://www.kaggle.com/code/kodaria/ml2025-homework-10-diffusion/notebook?scriptVersionId=267248560)，无需本地环境。
 
 # Hints
-[官方作业指导](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw10.pdf)给了两种途径，一种是[blip diffusion](https://huggingface.co/salesforce/blipdiffusion)，简而言之就是通常的diffusion只能用clip接受文本提示，而blip diffusion把clip换成一个叫blip的组件，能同时接受文本和参考图像；然而blip diffuasion之能接受一张参考图像并且生成可控性较差，所以还有一条路叫DreamBooth，即在 Stable Diffusion 的文本编码空间中加入一个新 token（比如 “sks turtle”），并通过微调让模型学会把这个 token 对应到你提供的乌龟玩具样子，这种途径在参考图像是多张的时候往往效果更好。
+[官方作业指导](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw10.pdf)给了两种途径，一种是[blip diffusion](https://huggingface.co/salesforce/blipdiffusion)，简而言之就是通常的diffusion只能用clip接受文本提示，而blip diffusion把clip换成一个叫blip的组件，能同时接受文本和参考图像；然而blip diffusion之能接受一张参考图像并且生成可控性较差，所以还有一条路叫custom diffusion(https://arxiv.org/abs/2212.04488)，即在 Stable Diffusion 的文本编码空间中加入一个新 token（比如 “sks turtle”），并通过微调让模型学会把这个 token 对应到你提供的乌龟玩具样子，这种途径在参考图像是多张的时候往往效果更好。
 
 # My approch
-我尝试了blip diffusion后发现效果较差，无论怎么按照[Hints](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw10.pdf)调参数也离boss baseline差得远，后来发现blip diffusion是个很冷门的东西，自从当年的几篇论文后再也没动静，并且新版的diffusers0.33版本后已停止对该模型的更新支持，目前在这类任务上比较主流的是controlnet的相关变体，我尝试了其中的[ip-adpter](https://huggingface.co/h94/IP-Adapter),在多次调参后成功通过[作业指导](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw10.pdf)中的boss baseline。
+我尝试了blip diffusion后发现效果较差，无论怎么按照[Hints](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw10.pdf)调参数也离boss baseline差得远，后来发现blip diffusion是个很冷门的东西，自从当年的几篇论文后再也没动静，并且自从diffusers0.33版本后已停止对该模型的更新支持，目前在这类任务上比较主流的是controlnet的相关变体，我尝试了其中的[ip-adpter](https://huggingface.co/h94/IP-Adapter),在多次调参后成功通过[作业指导](https://speech.ee.ntu.edu.tw/~hylee/ml/ml2025-course-data/hw10.pdf)中的boss baseline。
 
 另外ip-adapter其实就是搞个厉害点的clip把参考图像喂给它，更加说明blip完全是多此一举效果还差。。
 
@@ -66,5 +66,5 @@ ghostnet distance直接暴降到1.15，clip score和faceless faces都达到boss 
 
 另外这里ip_adapter_scale=0.8也能让模型很听prompt的话，不像之前生成猫狗得调到0.6左右，可能模型训练数据里面人像比较多吧。
 
-至此似乎也没啥必要用DreamBooth了，以后有空可能会试试吧。或者大家催催我（
+最后提一下作业指导的方法都很老，2025年的今天还推荐blip2，以及custom diffusion[微调方法](https://arxiv.org/abs/2212.04488)其实就是当年追text inversion和dreambooth热度的水文，现在也没人用了。感兴趣的的可以试试正统的text inversion/dreambooth,这方面非常成熟，有diffusers的官方脚本，甚至不少ui界面都兼容，一行代码都不用写。
 
